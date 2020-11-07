@@ -1,0 +1,7 @@
+{% extends "mails/base_0.txt" %}
+{% block hello %}
+Dear {{ username }},
+{% endblock %}
+{% block bye %}
+Your friends at Videopath
+{% endblock %}

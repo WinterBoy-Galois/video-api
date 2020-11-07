@@ -1,0 +1,8 @@
+{% extends "mails/base_1.txt" %}
+{% block content %}
+Success!
+
+"{{ title }}" is processed and loaded in your library.
+
+Edit your video: http://app.videopath.com/#edit/{{ video_id }}/markers
+{% endblock %}

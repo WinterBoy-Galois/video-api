@@ -1,0 +1,304 @@
+{% load mathfilters %}
+<!doctype html>
+<html>
+<head>
+    <style>
+        #canvas {
+            width: 600px;
+            margin:0 auto;
+            font-size: 14px;
+            font-family: Arial;
+            color:#505050;
+            background-color: #f7f7f7;
+            padding:20px;
+        }
+
+        #outer {
+            border: 2px solid #41c3ac;
+        }
+
+        #header {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+            height:100px !important;
+            color:white !important;
+            line-height:100px !important;
+            text-align:center !important;
+            font-size:45px !important;
+            letter-spacing:1px !important;
+        }
+
+        #content {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+            padding:20px;
+            color:#333;
+        }
+
+        a {
+            color:#273a45;
+            font-weight: bold;
+        }
+
+        #footer {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+            height:40px !important;
+            line-height:40px !important;
+            text-align:center !important;
+        }
+
+        #footer a:hover {
+            color:#ff884d !important;
+        }
+
+        #content a.button {
+            color: white;
+            display: inline-block;
+            background-color: #ff884d;
+            box-shadow: 0px 2px 0px #ef7e4b;
+            min-height: 40px;
+            line-height: 40px;
+            border-radius: 2px;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0px 10px;
+            text-decoration: none;
+        }
+
+        #content a.button:hover {
+            background-color: #ef7e4b;
+        }
+
+        .center_outer {
+            text-align: center;
+        }
+
+        .center_inner {
+            display: inline-block;
+        }
+
+        .logo_icon {
+            width: 53px;
+            height: 41px;
+        }
+
+        .logo_text {
+            width: 140px;
+            height: 36px;
+        }
+
+        .logo {
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        #imprint {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 10px;
+        }
+        .logo a {
+            text-decoration: none;
+        }
+        .hello {
+            margin-bottom: 40px;
+        }
+        .bye {
+            margin-top: 40px;
+        }
+        #footer {
+            font-size: 12px;
+        }
+        .get_in_touch {
+            text-align: center;
+            color: #aaa;
+        }
+
+        .get_in_touch a {
+            color:#aaa;
+        }
+
+        .address_vp {
+        	font-size: 12px;
+        }
+
+        .subject {
+        	margin:30px 0px;
+        	font-weight: bold;
+        }
+
+        .date {
+        	margin:30px 0px;
+        	float:right;
+        }
+
+        .invoice_entries {
+        	font-family: "Courier New", Courier, monospace;
+        }
+
+        .invoice_entry.right {
+        	float:right;
+        }
+
+        .invoice_entry.total {
+            font-weight: bold;
+        }
+
+        .clear {
+        	clear: both;
+        }
+
+        .invoice_entry {
+            padding:2px 0px;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+<div id = "canvas">
+    <div id ="outer">
+        <div class = "center_outer logo">
+            <div class = "center_inner">
+                <a href = "http://www.videopath.com">
+                <img class = "logo_icon" src = "//app.videopath.com/style/img/logo_symbol.png" />
+                <img class = "logo_text" src = "//app.videopath.com/style/img/logo_text.png" />
+                </a>
+            </div>
+        </div>
+
+        <div id="content">
+        <p class = "address_vp">
+             Intelling Media Corp.<br/>
+             939 TERMINAL WAY <br/>
+             SAN CARLOS, CA 94070
+        </p>
+
+        <div class = "address_client">
+        	{{ payment_details.name }}<br />
+        	{{ payment_details.street }}<br />
+        	{{ payment_details.post_code }} {{ payment_details.city }}<br />
+            {{ payment_details.country }}
+        </div>
+		<div class = "date">
+        	{{ payment.date|date:"M d, Y" }}
+        </div>
+        <div class = "subject">
+        	Invoice No. a01-{{payment.number }}
+        </div>
+        <p class = "hello">
+            Dear {{ payment_details.name }}, <br /><br />
+            This is your invoice for your plan on Videopath. 
+
+            {% if payment.paid == True and payment.provider == "stripe" %}
+                Your credit card has already been successfully charged with the amount of {{ payment.amount_due | div:100 | floatformat:2 }}    {{payment.currency}}.
+            {% elif not payment.payed and payment.provider == "stripe" %}
+                Your credit card will be charged with the amount of {{ payment.amount_due | div:100 | floatformat:2 }} {{payment.currency}}.
+            {% elif payment.paid == True %}
+                We have received your payment of {{ payment.amount_due | div:100 | floatformat:2 }} {{payment.currency}}.
+            {% else %}
+                Please transfer the amount of {{ payment.amount_due | div:100 | floatformat:2 }} {{payment.currency}} to our account at Postbank, IBAN DE22 5451 0067 0654 6516 78 within 15 working days.
+            {% endif %}
+
+        </p>
+        <div class = "invoice_entries">
+
+            {% for line in lines %}
+            	<div class = "invoice_entry right">
+            		{{ line.amount | div:100 | floatformat:2 }} {{payment.currency}}
+            	</div>
+            	<div class = "invoice_entry">
+                    {% if line.text %}
+                        {{ line.text }}
+                    {% endif %}
+            	</div>
+                <div class = "clear">
+                </div>
+            {% endfor %}
+
+            {% if invoice.subtotal != invoice.total %}
+                <div class = "invoice_entry right">
+                    {{ invoice.total | sub:invoice.subtotal | div:100 | floatformat:2 }} {{payment.currency}}
+                </div>
+                <div class = "invoice_entry">
+                    Discount
+                </div>
+                <div class = "clear">
+                </div>
+            {% endif %}
+
+            <div class = "invoice_entry right">
+                ---
+            </div>
+            <div class = "clear">
+            </div>
+            <div class = "invoice_entry right total">
+                {{ payment.amount_due | div:100 | floatformat:2}} {{payment.currency}}
+            </div>
+            <div class = "invoice_entry total">
+                AMOUNT DUE
+            </div>
+        	<div class = "invoice_entry right">
+        		---
+        	</div>
+        	<div class = "clear">
+        	</div>
+            <div class = "invoice_entry right">
+                {{ payment_info.amount_due_net | div:100 | floatformat:2}} {{payment.currency}}
+            </div>
+            <div class = "invoice_entry ">
+                TOTAL NET
+            </div>
+            <div class = "clear">
+            </div>
+            <div class = "invoice_entry right">
+                {{ payment_info.amount_vat | div:100 | floatformat:2}} {{payment.currency}}
+            </div>
+            <div class = "invoice_entry">
+                VAT ({{percent_vat}}%)
+            </div>
+            <div class = "clear">
+            </div>
+
+        </div>
+
+        {% if payment_details.notes %}
+        <p>
+            <br />
+            <strong>Your notes:</strong><br/>{{ payment_details.notes }}
+        </p>
+        {% endif %}
+
+        <p class = "bye">
+            Your friends at Videopath<br />
+            <a href = "http://www.videopath.com">videopath.com</a>
+        </p>
+        <p class = "get_in_touch">
+            <br /><br />
+            Questions or feedback? Get in touch at <a href="sales@videopath.com">sales@videopath.com</a>.
+        </p>
+        </div>
+
+        <div id="footer">
+            <a href = "mailto:sales@videopath.com">Contact Us!</a> &diams;
+            <a href = "https://www.facebook.com/videopath">Facebook</a> &diams;
+            <a href = "https://twitter.com/Videopath">Twitter</a>
+
+        </div>
+    </div>
+    <div id="imprint">
+        Intelling Media Corp.<br/>
+        939 TERMINAL WAY <br/>
+        SAN CARLOS, CA 94070
+        {% comment %}
+        Managing Directors: Anna Rose und David Scharf<br>
+        Registergericht: Berlin Charlottenburg<br>
+        Registernummer: HRB 153852 B<br>
+        {% endcomment %}
+    </div>
+</div>
+</body>
+</html>
+
+

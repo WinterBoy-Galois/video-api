@@ -1,0 +1,20 @@
+#python
+*.py[cod]
+
+# Django
+videopath/settings/local.py
+videopath/staticfiles
+test.db
+
+# redis
+dump.rdb
+
+# venv
+venv/
+
+# node
+*/node_modules
+*.noseids
+
+# Mac OSX files
+.DS_Store

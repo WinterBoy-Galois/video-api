@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+<head>
+    <style>
+        #canvas {
+            width: 600px;
+            margin:0 auto;
+            font-size: 14px;
+            font-family: Arial;
+            color:#505050;
+            background-color: #f7f7f7;
+            padding:20px;
+        }
+
+        #outer {
+            border: 2px solid #41c3ac;
+        }
+
+        #header {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+            height:100px !important;
+            color:white !important;
+            line-height:100px !important;
+            text-align:center !important;
+            font-size:45px !important;
+            letter-spacing:1px !important;
+        }
+
+        #content {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+            padding:20px;
+            color:#333;
+        }
+
+        a {
+            color:#273a45;
+            font-weight: bold;
+        }
+
+        #footer {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+            height:40px !important;
+            line-height:40px !important;
+            text-align:center !important;
+        }
+
+        #footer a:hover {
+            color:#ff884d !important;
+        }
+
+        #content a.button {
+            color: white;
+            display: inline-block;
+            background-color: #ff884d;
+            box-shadow: 0px 2px 0px #ef7e4b;
+            min-height: 40px;
+            line-height: 40px;
+            border-radius: 2px;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0px 10px;
+            text-decoration: none;
+        }
+
+        #content a.button:hover {
+            background-color: #ef7e4b;
+        }
+
+        .center_outer {
+            text-align: center;
+        }
+
+        .center_inner {
+            display: inline-block;
+        }
+
+        .logo_icon {
+            width: 53px;
+            height: 41px;
+        }
+
+        .logo_text {
+            width: 140px;
+            height: 36px;
+        }
+
+        .logo {
+            margin-top: 30px;
+            padding-bottom: 20px;
+            margin-left:25px;
+            margin-right: 25px;
+            border-bottom: 2px solid #41c3ac;
+        }
+
+        #imprint {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 10px;
+        }
+        .logo a {
+            text-decoration: none;
+        }
+        .hello {
+            margin-bottom: 40px;
+        }
+        .bye {
+            margin-top: 40px;
+        }
+        #footer {
+            font-size: 12px;
+        }
+        .get_in_touch {
+            text-align: center;
+            color: #aaa;
+        }
+
+        .get_in_touch a {
+            color:#aaa;
+        }
+    {% block style %}{% endblock %}
+
+    </style>
+</head>
+
+<body>
+<div id = "canvas">
+    <div id ="outer">
+        <div class = "center_outer logo">
+            <div class = "center_inner">
+                <a href = "http://www.videopath.com">
+                <img class = "logo_icon" src = "http://app.videopath.com/style/img/logo_symbol.png" />
+                <img class = "logo_text" src = "http://app.videopath.com/style/img/logo_text.png" />
+                </a>
+            </div>
+        </div>
+
+        <div id="content">
+            {% block hello %}{% endblock %}
+            {% block content %}{% endblock %}
+            {% block bye %}{% endblock %}
+        <p class = "get_in_touch">
+            <br /><br />
+            Questions or feedback? Get in touch at <a href="mailto:support@videopath.com">support@videopath.com</a>.
+        </p>
+        </div>
+
+        <div id="footer">
+            <a href = "mailto:support@videopath.com">Contact Us!</a> &diams;
+            <a href = "http://videopath.com">Website</a> &diams;
+            <a href = "https://www.facebook.com/videopath">Facebook</a> &diams;
+            <a href = "https://www.linkedin.com/company/videopath">LinkedIn</a> &diams;
+            <a href = "https://twitter.com/Videopath">Twitter</a>
+        </div>
+    </div>
+    <div id = "imprint">
+        Intelling Media Corp.<br />
+        939 TERMINAL WAY, SAN CARLOS, CA<br/>
+        <a href="mailto:support@videopath.com">support@videopath.com</a>
+    </div>
+</div>
+</body>
+</html>
+
+

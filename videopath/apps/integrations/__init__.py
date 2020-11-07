@@ -1,0 +1,1 @@
+default_app_config = 'videopath.apps.integrations.apps.IntegrationsConfig'

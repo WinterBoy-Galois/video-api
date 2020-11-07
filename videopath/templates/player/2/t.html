@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+
+  <!-- title and meta tags -->
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}" />
+  <meta charset="UTF-8">
+
+  <!-- ios tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name = "viewport" content = "width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+
+  <!-- fb meta tags -->
+  <meta property="og:title" content="{{ title }}"/>
+  <meta property="og:image" content="{{ thumb_urls.large }}"/>
+  <meta property="og:image:url" content="{{ thumb_urls.large }}"/>
+  <meta property="og:site_name" content="Videopath - interactive video made easy"/>
+  <meta property="og:description" content="{{ description | truncatewords:20 }}"/>
+  <meta property="og:url" content="{{ video_url }}"/>
+  <meta property="og:type" content="video.movie" />
+
+  <!-- error reporting -->
+  <script src="//cdn.ravenjs.com/1.1.2/jquery,native/raven.min.js"></script>
+  <script>
+      Raven.config("https://f20239c96aee4394b9b61981f6ac869d@app.getsentry.com/38934", {}).install();
+  </script>
+
+
+  <!-- styles -->
+  <link rel="stylesheet" type="text/css" href="{{ src_url }}style/style.gz.css" media="screen" />
+
+  <!-- sripts -->
+  <script>
+    document.video_data = {{ video_data | safe }};
+  </script>
+
+  <script src = "//www.google.com/jsapi?key=AIzaSyAoL1nrkpujNrCNwqwuabOBrBWHps0Xv9M"></script>
+
+</head>
+
+<body id = "body" style="background-color:black">
+
+  <!-- status view during loading -->
+  <div id = "status">
+    <div class = "spinner_outer">
+       <div class = "working">
+            <div class ="coq_small">
+            </div>
+            <div class = "coq_big">
+            </div>
+         </div>
+    </div>
+    <div id = "status_inner">
+      <a target = "_blank"  href = "http://www.videopath.de">
+        <div class = "logo"></div>
+      </a>
+      <br />
+      <div class = "status1">
+      </div>
+      <div class = "status2">
+      </div>
+    </div>
+  </div>
+
+  <!-- container for seo text -->
+  <div class = "vp_seo">
+    {% for marker in markers.all %}
+      <h1>{{marker.title}}</h1>
+      {% for content in marker.contents.all %}
+        <div>{{content.text | safe}}</div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+
+  <!-- load dependencies with require -->
+  <script src="{{ src_url }}scripts/libs/require-min.gz.js"></script>
+  <script>
+    require.config({
+        "urlArgs": "version={time_stamp}",
+        baseUrl:"scripts",
+        waitSeconds: 0
+      });
+      require(["{{ src_url }}scripts/main.gz.js"]);
+  </script>
+
+</body>
+</html>
+
+

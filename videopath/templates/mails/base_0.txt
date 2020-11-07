@@ -1,0 +1,5 @@
+{% block hello %}{% endblock %}
+{% block content %}{% endblock %}
+{% block bye %}{% endblock %}
+
+Questions or feedback? Get in touch at support@videopath.com.

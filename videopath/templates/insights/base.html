@@ -1,0 +1,151 @@
+<html lang="en-us"><head>
+    <title>Videopath Insights -  {{ title }} </title>
+    <meta charset="utf-8">    
+    <style>
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        header {
+            position: absolute;
+            left:0px;
+            right:0px;
+            top:0px;
+            height:50px;
+            background-color:#273a45;
+            color:white;
+            text-align:center;
+            line-height: 50px;
+        }
+
+        header a {
+            color:white;
+            font-weight: lighter;
+            text-decoration: none;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        header a:hover {
+            color:lightblue;
+        }
+
+        footer {
+            position: fixed;
+            left:0px;
+            right:0px;
+            bottom:0px;
+            height:30px;
+            line-height: 30px;
+            background-color:#273a45;
+            color: white;
+            text-align: center;
+            font-weight: lighter;
+        }
+
+        a {
+            color: gray;
+        }
+
+        a:hover {
+            color: black;
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: normal;
+        }
+
+        .insight_content {
+            min-width: 320px;
+            display: table;
+            margin: 0 auto;
+        }
+
+        .logo {
+            width:130px;
+            height: 40px;
+            background-size: 130px 40px;
+            top:5px;
+            position: absolute;
+            padding:0px;
+            margin:0px;
+            background-image: url('http://videopath.com/wp-content/themes/videopath/img/videopath_white.png');
+            color:#273a45;
+            left: 20px;
+        }
+
+        .content {
+            margin-top: 50px;
+            padding: 20px;
+            margin-bottom: 50px;
+        }
+            
+        table {
+            width: 100%;
+            max-width: 1024px;
+        }
+
+        table tr:nth-child(odd) {
+            background-color:#f0f0f0;
+        }
+
+        table td {
+            padding: 5px;
+        }
+
+        h3 {
+            background-color: #eee;
+            text-align: center;
+            margin-top:30px;
+        }
+
+
+        .vp_linegraph {
+            height:250px;
+            width: 800px;
+        }
+
+
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" crossorigin="anonymous"></script>
+    <script>
+        google.charts.load('current', {'packages':['corechart']});
+    </script>
+</head>
+<body>
+
+                                        
+<header>
+    <a href = "/admin/insights" class = "logo"></a>
+    <a href='/admin/insights/kpis-cohort/'>KPIs cohort</a> |
+    <a href='/admin/insights/kpis-all/'>KPIs all</a> |
+    <a href='/admin/insights/kpis-web/'>KPIs Web</a> |
+    <a href='/admin/insights/userstats/'>Userstats</a> | 
+    <a href='/admin/insights/users/sales/'>Userlist</a> | 
+    <a href='/admin/insights/subscriptions/'>Subscriptions</a> |
+    <a href='/admin/insights/videos/'>Videos</a> |
+    <a href='/admin/insights/features/'>Features</a>
+</header>
+
+<div class = "content">
+
+    <h1>{{ title }} </h1>
+    
+    <pre class = "insight_content">
+{{ insight_content | safe}}    
+    </pre>
+
+    {% block content %}
+
+    {% endblock content %}
+</div>
+
+<footer>
+    Videopath
+</footer>
+
+</body>
+</html>

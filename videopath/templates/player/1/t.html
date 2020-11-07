@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+
+  <title>{{ title }}</title>
+
+  <!-- ios tags -->
+  <meta name="viewport" content="width=device-width, height=device-height" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name = "viewport" content = "initial-scale = 1, user-scalable = no" />
+
+  <!-- fb meta tags -->
+  <meta property="og:title" content="{{ title }}"/>
+  <meta property="og:image" content="{{ thumb_url }}"/>
+  <meta property="og:site_name" content="videopath - interactive video made easy"/>
+  <meta property="og:description" content="{{ description | truncatewords:20 }}"/>
+  <meta property="og:url" content="{{ video_url }}"/>
+  <meta property="og:type" content="video.movie" />
+
+  <!-- error reporting -->
+  <script>
+    (function(_,e,rr,s){_errs=[s];var c=_.onerror;_.onerror=function(){var a=arguments;_errs.push(a);
+    c&&c.apply(this,a)};var b=function(){var c=e.createElement(rr),b=e.getElementsByTagName(rr)[0];
+    c.src="//beacon.errorception.com/"+s+".js";c.async=!0;b.parentNode.insertBefore(c,b)};
+    _.addEventListener?_.addEventListener("load",b,!1):_.attachEvent("onload",b)})
+    (window,document,"script","532c404d84e0515d7a000521");
+  </script>
+
+  <!-- styles -->
+  <link rel="stylesheet" type="text/css" href="{{ src_url }}style/style.css" media="screen" />
+
+  <!-- sripts -->
+  <script>
+    document.video_data = {{ video_data | safe }};
+  </script>
+  <script data-main="{{ src_url }}scripts/main" src="{{ src_url }}scripts/libs/require-min.js"></script>
+  <script src = "//www.google.com/jsapi?key=AIzaSyAoL1nrkpujNrCNwqwuabOBrBWHps0Xv9M"></script>
+
+</head>
+
+<body id = "body">
+
+   <!-- the player -->
+   <div id = "player_container">
+     <video id="pathplayer" class="video-js vjs-default-skin" preload="none" width="800" height="600"
+        poster="">
+        <source src="" type='video/mp4' />
+        <source src="" type='video/webm' />
+    </video>
+  </div>
+
+  <div id = "ui_container">
+  </div>
+
+  <!-- status view during loading -->
+  <div id = "status">
+    <div class = "spinner_outer">
+       <div class = "working">
+            <div class ="coq_small">
+            </div>
+            <div class = "coq_big">
+            </div>
+         </div>
+    </div>
+    <div id = "status_inner">
+      <a target = "_blank"  href = "http://www.videopath.de">
+        <div class = "logo"></div>
+      </a>
+      <br />
+      <div class = "status1">
+      </div>
+      <div class = "status2">
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+
+

@@ -1,0 +1,4 @@
+{% extends "mails/base_1.txt" %}
+{% block content %}
+{{ text }}
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "mails/base_1.txt" %}
+{% block content %}
+Thanks for signing up for Videopath.
+
+Videopath connects web content to video in a structured way, providing an engaging and interactive platform for your business’ videos.
+
+Get started: http://app.videopath.com
+{% endblock %}

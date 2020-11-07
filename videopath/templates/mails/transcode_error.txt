@@ -1,0 +1,8 @@
+{% extends "mails/base_1.txt" %}
+{% block content %}
+Uh oh!
+
+There was an error processing "{{ title }}".
+
+Please return to Videopath so we can get your video up and running: http://app.videopath.com
+{% endblock %}

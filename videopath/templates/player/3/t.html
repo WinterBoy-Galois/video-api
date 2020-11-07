@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+
+  <!-- title and meta tags -->
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}" />
+  <meta charset="UTF-8">
+
+  <!-- ios tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name = "viewport" content = "width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+
+  <!-- fb meta tags -->
+  <meta property="og:title" content="{{ title }}"/>
+  <meta property="og:image" content="{{ thumb_urls.large }}"/>
+  <meta property="og:image:url" content="{{ thumb_urls.large }}"/>
+  <meta property="og:site_name" content="Videopath - interactive video made easy"/>
+  <meta property="og:description" content="{{ description | truncatewords:20 }}"/>
+  <meta property="og:url" content="{{ video_url }}"/>
+  <meta property="og:type" content="video.movie" />
+
+  <!-- oembed -->
+  <link rel="alternate" type="application/json+oembed"
+    href="http://api.videopath.com/oembed?url={{ video_url | urlencode}}&format=json"
+    title="{{ title }}" />
+  <link rel="alternate" type="text/xml+oembed"
+    href="http://api.videopath.com/oembed?url={{ video_url | urlencode}}&format=xml"
+    title="{{ title }}" />
+
+  <!-- error reporting -->
+  <script src="//cdn.ravenjs.com/1.1.2/jquery,native/raven.min.js"></script>
+  <script>
+      Raven.config("https://f20239c96aee4394b9b61981f6ac869d@app.getsentry.com/38934", {}).install();
+  </script>
+
+
+  <!-- style inline -->
+  <style>
+.vp_margin_block,p,ul,ol,address,h4,h5,h6{margin:10px 0}.vp_margin_block_lg,dl{margin:20px 0}.vp_centered_block{margin-left:auto;margin-right:auto}a{color:#222;font-weight:normal;text-decoration:underline;outline:none}.no-touch a:hover,a:focus,a:active{color:#41c3ac}.vp_clear_anchor_style{color:inherit;text-decoration:none}.no-touch .vp_clear_anchor_style:hover,.vp_clear_anchor_style:focus,.vp_clear_anchor_style:active{color:inherit}b,strong{font-weight:bold}i,em{font-style:italic}ul,ol{padding-left:30px}ul li,ol li{display:list-item;margin:5px 0}ul ul,ul ol,ol ul,ol ol{margin:0}ul.vp_no_list,ol.vp_no_list{list-style-type:none;padding:0}ul.vp_no_list li,ol.vp_no_list li{display:block;margin:0}ul{list-style-type:disc}ol{list-style-type:decimal}dt{font-weight:bold}address{font-style:normal}small{font-size:85%}cite{font-style:normal}mark{background-color:#ff6b57;color:white;padding:.2em}body,html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6 !important}h1,h2,h3,h4,h5,h6{font-family:"PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:normal}h1 small,h2 small,h3 small,h4 small,h5 small,h6 small{font-weight:normal;line-height:1}h1,h2,h3{margin-top:20px;margin-bottom:10px;line-height:1.3}h1 small,h2 small,h3 small{font-size:65%}h4 small,h5 small,h6 small{font-size:75%}h1{font-size:36px}h2{font-size:30px}h3{font-size:23px}h4{font-size:18px}h5{font-size:16px}h6{font-size:12px}.vp_player_content_typography{font-size:18px;font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:400;letter-spacing:0.3px;word-spacing:0.1em}.vp_player_content_typography h1,.vp_player_content_typography h2,.vp_player_content_typography h3,.vp_player_content_typography h4,.vp_player_content_typography h5,.vp_player_content_typography h6{font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:600;margin:18.66667px 0;letter-spacing:0;word-spacing:0.1em}.vp_player_content_typography p,.vp_player_content_typography ul,.vp_player_content_typography ol{margin:18.66667px 0}@media only screen and (max-width: 479px){.vp_player_content_typography p,.vp_player_content_typography li{font-size:16px;letter-spacing:0.5px}}@-moz-keyframes vp_spin{100%{-moz-transform:rotate(360deg);transform:rotate(360deg)}}@-webkit-keyframes vp_spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes vp_spin{100%{-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@-moz-keyframes vp_spin_rev{100%{-moz-transform:rotate(-360deg);transform:rotate(-360deg)}}@-webkit-keyframes vp_spin_rev{100%{-webkit-transform:rotate(-360deg);transform:rotate(-360deg)}}@keyframes vp_spin_rev{100%{-moz-transform:rotate(-360deg);-ms-transform:rotate(-360deg);-webkit-transform:rotate(-360deg);transform:rotate(-360deg)}}.vp_fast_animations{-moz-transition:all 0.2s ease;-o-transition:all 0.2s ease;-webkit-transition:all 0.2s ease;transition:all 0.2s ease}.vp_no_animations{-moz-transition:all 0s ease;-o-transition:all 0s ease;-webkit-transition:all 0s ease;transition:all 0s ease}.vp_fast_animations_opacity{-moz-transition:opacity 0.2s ease;-o-transition:opacity 0.2s ease;-webkit-transition:opacity 0.2s ease;transition:opacity 0.2s ease}.vp_fast_animations_ease{-webkit-transition:all 300ms cubic-bezier(0.23, 1, 0.32, 1);transition:all 300ms cubic-bezier(0.23, 1, 0.32, 1)}.vp_fast_animations_opacity_ease{-webkit-transition:opacity 300ms cubic-bezier(0.23, 1, 0.32, 1);transition:opacity 300ms cubic-bezier(0.23, 1, 0.32, 1)}.vp_spinning_coq_small,.vp_loading_indicator:before{width:20px;height:20px;background:url("{{ src_url }}style/sprites/sprites_all.png") no-repeat;background-position:-180px -60px;background-size:250px 250px;-moz-animation:vp_spin 3s linear infinite;-webkit-animation:vp_spin 3s linear infinite;animation:vp_spin 3s linear infinite}.vp_spinning_coq_small.vp_dark,.vp_dark.vp_loading_indicator:before{background:url("{{ src_url }}style/sprites/sprites_all.png") no-repeat;background-position:-160px -60px;background-size:250px 250px}.vp_spinning_coq_big,.vp_loading_indicator:after{width:30px;height:30px;background:url("{{ src_url }}style/sprites/sprites_all.png") no-repeat;background-position:-160px -30px;background-size:250px 250px;-moz-animation:vp_spin_rev 4s linear infinite;-webkit-animation:vp_spin_rev 4s linear infinite;animation:vp_spin_rev 4s linear infinite}.vp_spinning_coq_big.vp_dark,.vp_dark.vp_loading_indicator:after{background:url("{{ src_url }}style/sprites/sprites_all.png") no-repeat;background-position:-160px 0px;background-size:250px 250px}.vp_loading_indicator{position:absolute;top:0;right:0;bottom:0;left:0;width:80px;height:80px;margin:auto;background:url("{{ src_url }}style/sprites/sprites_all.png") no-repeat;background-position:0px 0px;background-size:250px 250px}.vp_loading_indicator.vp_dark{opacity:0.8;background:url("{{ src_url }}style/sprites/sprites_all.png") no-repeat;background-position:-80px 0px;background-size:250px 250px}.vp_loading_indicator.vp_dark:before{background:url("{{ src_url }}style/sprites/sprites_all.png") no-repeat;background-position:-160px -60px;background-size:250px 250px}.vp_loading_indicator.vp_dark:after{background:url("{{ src_url }}style/sprites/sprites_all.png") no-repeat;background-position:-160px 0px;background-size:250px 250px}.vp_loading_indicator:before{content:" ";position:absolute;left:45px;top:47px;margin:-6px 0 0 -6px}.vp_loading_indicator:after{content:" ";position:absolute;left:32px;top:32px;margin:-12px 0 0 -12px}.vp_loading_indicator.vp_stopped:after,.vp_loading_indicator.vp_stopped:before{-moz-animation:none;-webkit-animation:none;animation:none}#status{position:absolute;top:0;right:0;bottom:0;left:0;color:#bbb;font-size:12px;text-align:center}#status #status_inner{position:absolute;height:100px;width:300px;left:50%;top:50%;margin-left:-150px;margin-top:40px}#status #status_inner .status1{margin-bottom:7px;font-weight:bold;font-size:14px}#status #status_inner img{width:86px;height:27px}
+  </style>
+
+  <!-- sripts -->
+  <script>
+    document.video_data = {{ video_data | safe }};
+  </script>
+
+</head>
+
+<body id = "body" style="background-color:black"> 
+
+  <!-- status view during loading -->
+  <div id = "status">
+    <div class = "vp_loading_indicator">
+    </div>
+    <div id = "status_inner">
+      <a target = "_blank"  href = "http://www.videopath.de">
+        <div class = "logo"></div>
+      </a>
+      <br />
+      <div class = "status1" id = "vp_loading_status_1">
+        Loading video...
+      </div>
+      <div class = "status2">
+      </div>
+    </div>
+  </div>
+
+  <!-- container for seo text -->
+  <div class = "vp_seo" style = "display:none">
+    {% for marker in markers.all %}
+      <h1>{{marker.title}}</h1>
+      {% for content in marker.contents.all %}
+        <div>{{content.text | safe}}</div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+
+  <!-- load main js dependency -->
+  <script>
+    (function(){
+
+      // IE detection
+      function isIE () {
+        var myNav = navigator.userAgent.toLowerCase();
+        return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+      }
+
+      // prepare vars
+      var src = "{{ src_url }}scripts/desktop.js",
+            s = document.createElement('script'),
+            el_status_1 =  document.getElementById('vp_loading_status_1');
+
+
+      if ( isIE() && isIE() < 9 ) {
+        el_status_1.innerHTML = "Internet Explorer 8 and earlier are not supported. Please upgrade to a newer Version of your Browser!";
+      } else {
+        s.src = src;
+        document.body.appendChild(s);
+      }
+      
+    })();
+  </script>
+
+</body>
+</html>
+
+

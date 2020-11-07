@@ -1,0 +1,8 @@
+{% extends "mails/base_1.txt" %}
+{% block content %}
+Your Videopath subscription has been updated.
+
+Your plan will switch to Videopath {{ plan }} plan on {{ switch_date }}. We will email you when your new plan is activated. 
+
+To change your plan or payment settings, visit your plans page in your account settings. 
+{% endblock %}

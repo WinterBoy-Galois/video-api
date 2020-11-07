@@ -1,0 +1,90 @@
+{% extends "mails/base_0.html" %}
+{% block style %}
+	
+.share_link {
+	display:block;
+	width:100%;
+	position:relative;
+}
+
+p.info {
+	color:#999;
+	font-size:12px;
+	margin-top:5px;
+}
+
+.share_link img {
+	max-width:100%;
+}
+
+a.play_btn {
+	display:block;	
+	background-image:url("https://src.videopath.com/share_mails/play_btn.png");
+	 background-repeat: no-repeat;
+    background-position: center; 
+    background-size:105px 105px;
+    opacity:0.8;
+}
+
+a.play_btn:hover {
+	opacity:1;
+}
+
+h3 {
+	color:#41c3ac;
+	margin-bottom:7px;
+}
+
+.message {
+	background-color:#eee;
+	padding:10px;
+	margin-top:5px;
+}
+
+{% endblock %}
+
+
+{% block hello %}
+<p class = "hello">
+Hi there,
+</p>
+{% endblock %}
+
+{% block content %}
+<p>
+{{user.username | capfirst}} has shared this interactive video with you!
+</p>
+<div class = "share_link" >
+	<a class = "play_btn" target="_blank" href = "{{link}}">
+	<img src = "{{thumb_url}}">
+	</img>
+	</a>
+</div>
+<p class = "info">
+	Click on the thumbnail to see the video!
+</p>
+<h3>
+	{{title}}
+</h3>
+
+{% if description %}
+<p class = "description">
+	{{description}}
+</p>
+{% endif %}
+
+{% if message %}
+<strong style = "font-size:12px;">Message from {{user.username}}:</strong>
+<p class = "message">
+	{{ message }}
+</p>
+{% endif %}
+
+{% endblock %}
+
+{% block bye %}
+ <p class = "bye">
+Your friends at Videopath<br />
+<a href = "http://www.videopath.com">videopath.com</a>
+</p>
+{% endblock %}

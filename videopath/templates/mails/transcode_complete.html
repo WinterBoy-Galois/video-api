@@ -1,0 +1,14 @@
+{% extends "mails/base_1.html" %}
+{% block content %}
+<p>
+Success!
+</p>
+<p>
+	"{{ title }}" is processed and loaded in your library.
+</p>
+<div style="text-align:center">
+	<br />
+		<a href="http://app.videopath.com/#edit/{{ video_id }}/markers" class = "button">Edit your video</a>
+	<br />
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+<html lang="en-us"><head>
+    <title>Videopath Insights -  {{ title }} </title>
+    <meta charset="utf-8">    
+    <style>
+
+    body {
+        margin:0px;
+    }
+
+    body, iframe {
+        width:100%;
+        height:100%;
+    }
+
+    iframe {
+        height:2000px;
+        border:0px;
+        margin-top:30px;
+    }
+
+    header {
+        text-align: center;
+        font-family: monospace;
+    }
+
+    pre {
+        max-width:600px;
+        margin:0px auto;
+    }
+
+    header a {
+        color:gray;
+    }
+
+    header a.current {
+        color:black;
+        text-decoration: none;
+    }
+
+    </style>
+</head>
+<body>
+
+                                        
+<header>
+        <br />
+        <div>
+            {% for m in mails %}
+                <a 
+                    {% if m = mail %} class = 'current' {% endif %}
+                    href = '/qa/mails/?mail={{m}}'>{{m}}</a> 
+                    {% if not forloop.last %} | {% endif %}
+            {% endfor %}
+        </div>
+        <br />
+        <div>
+            <a 
+                {% if mailtype = 'html' %} class = 'current' {% endif %}
+                href = '/qa/mails/?mail={{mail}}'>HTML</a> |
+            <a 
+                {% if mailtype = 'txt' %} class = 'current' {% endif %}
+                href = '/qa/mails/?mail={{mail}}&mailtype=txt'>TXT</a>
+        </div>
+        <br />
+        --
+        <br /><br />
+</header>
+ 
+<pre>
+From: {{ from_name }} ({{ from_email }})
+Reply-To: {{replyto}}
+To: {{to}}
+Subject: <b>{{mailsubject}}</b>
+</pre>
+<iframe src = '/qa/mails/{{mail}}/{{mailtype}}/'>
+</iframe>
+</body>
+</html>

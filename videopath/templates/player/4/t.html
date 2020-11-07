@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+
+    
+    <!-- 
+        BOOTSTRAP CONFIGURATION PLAYER
+    -->
+    <script>
+        document.videopath = document.videopath || {};
+        document.videopath.player = document.videopath.player || {};
+        document.videopath.player.conf = {
+            video: {{ video_data | safe }},
+            buttonColor: "{{ button_color }}",
+            buttonColorHover: "{{ button_color_hover }}",
+            arrowColor: "{{ arrow_color }}",
+            thumbnail: "{{ thumb_urls.large }}",
+            srcURL: "{{ src_url }}scripts/"
+        };
+        var sentryURL = 'https://0eef0917f06240e9bface1f8e314bbc8@app.getsentry.com/53700';
+    </script>
+
+
+    <!-- 
+        TITLE AND META TAGS
+    -->
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}" />
+
+
+    <!-- 
+        IOS TAGS
+    -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name = "viewport" content = "width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
+
+    <!-- Android Tags -->
+    <meta name="theme-color" content="{{ button_color }}">
+
+
+    <!-- 
+        OPEN GRAPH TAGS
+    -->
+    <meta property="og:title" content="{{ title }}"/>
+    <meta property="og:image" content="{{ thumb_urls.large }}"/>
+    <meta property="og:image:url" content="{{ thumb_urls.large }}"/>
+    <meta property="og:site_name" content="Videopath - interactive video made easy"/>
+    <meta property="og:description" content="{{ description | truncatewords:20 }}"/>
+    <meta property="og:url" content="{{ video_url }}"/>
+    <meta property="og:type" content="video.movie" />
+
+
+    <!-- 
+        OEMBED TAGS
+    -->
+    <link rel="alternate" type="application/json+oembed"
+        href="http://api.videopath.com/oembed?url={{ video_url | urlencode}}&format=json"
+        title="{{ title }}" />
+    <link rel="alternate" type="text/xml+oembed"
+        href="http://api.videopath.com/oembed?url={{ video_url | urlencode}}&format=xml"
+        title="{{ title }}" />
+    
+
+    <!-- 
+        ERROR REPORTING
+    -->
+    <script src="//cdn.ravenjs.com/1.1.2/jquery,native/raven.min.js"></script>
+    <script>
+        if ( window.location.href.indexOf('localhost') == -1 ) {
+            console.log('raven started');
+            Raven.config(sentryURL, {
+              whitelistUrls: [/.*videopath.com.*/,/.*cloudfront.net.*/]
+            }).install();
+        }
+    </script>
+
+
+    <!-- 
+        STYLE SHEETS
+    -->
+    <style>
+        @-moz-keyframes vp_spin{100%{-moz-transform:rotate(360deg);transform:rotate(360deg)}}@-webkit-keyframes vp_spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes vp_spin{100%{-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@-moz-keyframes vp_spin_rev{100%{-moz-transform:rotate(-360deg);transform:rotate(-360deg)}}@-webkit-keyframes vp_spin_rev{100%{-webkit-transform:rotate(-360deg);transform:rotate(-360deg)}}@keyframes vp_spin_rev{100%{-moz-transform:rotate(-360deg);-ms-transform:rotate(-360deg);-webkit-transform:rotate(-360deg);transform:rotate(-360deg)}}.vp_fast_animations{-moz-transition:all 0.2s ease;-o-transition:all 0.2s ease;-webkit-transition:all 0.2s ease;transition:all 0.2s ease}.vp_no_animations{-moz-transition:all 0s ease;-o-transition:all 0s ease;-webkit-transition:all 0s ease;transition:all 0s ease}.vp_fast_animations_opacity{-moz-transition:opacity 0.2s ease;-o-transition:opacity 0.2s ease;-webkit-transition:opacity 0.2s ease;transition:opacity 0.2s ease}.vp_fast_animations_ease{-webkit-transition:all 300ms cubic-bezier(0.23, 1, 0.32, 1);transition:all 300ms cubic-bezier(0.23, 1, 0.32, 1)}.vp_fast_animations_opacity_ease{-webkit-transition:opacity 300ms cubic-bezier(0.23, 1, 0.32, 1);transition:opacity 300ms cubic-bezier(0.23, 1, 0.32, 1)}#vp_bootstrap{background-color:black;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:12px;-moz-transition:opacity 0.2s ease;-o-transition:opacity 0.2s ease;-webkit-transition:opacity 0.2s ease;transition:opacity 0.2s ease;position:absolute;top:0;right:0;bottom:0;left:0;-webkit-font-smoothing:subpixel-antialiased;-moz-osx-font-smoothing:auto}#vp_bootstrap #vp_poster{position:absolute;top:0;right:0;bottom:0;left:0;background-color:black;z-index:0;background-size:cover;background-position:center;-moz-transition:opacity 0.2s ease;-o-transition:opacity 0.2s ease;-webkit-transition:opacity 0.2s ease;transition:opacity 0.2s ease}#vp_bootstrap #vp_playbutton{position:absolute;top:50%;left:50%;width:80px;height:80px;margin-left:-40px;margin-top:-40px;-moz-transition:opacity 0.2s ease,background-color 0.2s ease;-o-transition:opacity 0.2s ease,background-color 0.2s ease;-webkit-transition:opacity 0.2s ease,background-color 0.2s ease;transition:opacity 0.2s ease,background-color 0.2s ease;border-radius:2px;background-color:black;cursor:pointer;z-index:10;background-repeat:no-repeat;background-position:center}#vp_bootstrap #vp_playbutton #vp_playbutton_icon{position:absolute;fill:#fff;position:absolute;top:50%;left:50%;width:40px;height:40px;margin-left:-20px;margin-top:-20px}@media only screen and (min-width: 512px) and (min-height: 512px){#vp_bootstrap #vp_playbutton{position:absolute;top:50%;left:50%;width:120px;height:80px;margin-left:-60px;margin-top:-40px}}@media only screen and (min-width: 768px) and (min-height: 768px){#vp_bootstrap #vp_playbutton{position:absolute;top:50%;left:50%;width:180px;height:120px;margin-left:-90px;margin-top:-60px;background-size:66px 66px}#vp_bootstrap #vp_playbutton #vp_playbutton_icon{position:absolute;top:50%;left:50%;width:66px;height:66px;margin-left:-33px;margin-top:-33px}}#vp_bootstrap #vp_loader{position:absolute;top:50%;left:50%;width:25px;height:25px;margin-left:-12.5px;margin-top:-12.5px;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4NzFCNzI2MDBFQkQxMUU1QTMwNkNERTc1NEQwMzEyMyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4NzFCNzI2MTBFQkQxMUU1QTMwNkNERTc1NEQwMzEyMyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjgwMTE2REY1MEVCQTExRTVBMzA2Q0RFNzU0RDAzMTIzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjgwMTE2REY2MEVCQTExRTVBMzA2Q0RFNzU0RDAzMTIzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+mgAz5QAAAWdJREFUeNq8Vu1twyAQxVb+xyN4g7JB2KCM4BEyQkdwJ6g3qLMB3cDdwN2ATkAPCSRyOR9nR+qTnpSc7zjuC2hCCEoIDbTptweOUkMVnQjYAX24x5vQVrU7ojgjmZEGckL/bVowY0yp0YRtB+yBK7J7TCUKzaGULMA18JgJmSnXPVUifRFk47Wm0Kp/AI5kAl42dL+ArqjHQDRDxDdw4WpCtarHOS50J6IeV6yLDQfCSFfmABd+pZxopoOmjQ24FEmU90znjdnJzCgZZqFyAwuzRt+mItbQV2Ses23TxG4hbyB2yy/65gg9CmtOhRPUxKS0+JzrSk18quNDd9naEUGQOorYFlZEp/nknJoTqmkGrNugSytO8cdGbuMkz0XRLTPx5q4ZKqEfhTlyaT2FmpMY+o35/gN833sKX4vHQnkzRtknsQFdzEx5M7ojDwlD5N1JHxJSJ9T5ZKW2zY53V4dSskgN/wQYAJ1VNzUO8SRCAAAAAElFTkSuQmCC);background-size:25px 25px;background-repeat:no-repeat;z-index:5}#vp_bootstrap #vp_status{position:absolute;top:50%;left:50%;width:150px;height:40px;margin-left:-75px;margin-top:-20px;margin-top:25px;z-index:5;text-align:center}#vp_bootstrap .vp_hidden{opacity:0}#vp_bootstrap .vp_rotating{-moz-animation:vp_spin 2s linear infinite;-webkit-animation:vp_spin 2s linear infinite;animation:vp_spin 2s linear infinite}#vp_bootstrap.vp_touch_ready{pointer-events:none}
+        
+    </style>
+    
+
+    <!-- 
+        DEV LIBS
+    -->
+
+
+</head> 
+
+
+<body style="background-color:black">
+
+
+    <!-- 
+        APP AREA
+    -->
+    <div class = 'vp_player_app'>
+        <div id = "vp_bootstrap">
+            <div id = "vp_poster" class = "vp_hidden"></div>
+            <div id = "vp_playbutton">
+                <svg id = "vp_playbutton_icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
+                    <g transform="scale(0.09765625 0.09765625)">
+                        <path d="M464.621,241.541c17.39,10.145,17.39,26.09,0,34.79L80.57,499.501c-17.39,10.15-31.885,1.45-31.885-17.39
+                            V37.2c0-18.845,14.495-27.535,31.885-17.395L464.621,241.541L464.621,241.541z"/>
+                    </g>
+                </svg>
+            </div>
+            <div id = "vp_loader" class = "vp_hidden"></div>
+            <div id = "vp_status"></div>
+        </div>
+    </div>
+
+
+    <!-- 
+        SEO CONTAINER
+    -->
+    <div class = "vp_seo" style = "display:none">
+    {% for marker in markers.all %}
+      <h1>{{marker.title}}</h1>
+      {% for content in marker.contents.all %}
+        <div>{{content.text | safe}}</div>
+      {% endfor %}
+    {% endfor %}
+    </div>
+
+
+    <!-- 
+        BOOTSTRAP SCRIPTS
+    -->
+    <script>
+        !function(modules) {
+            function __webpack_require__(moduleId) {
+                if (installedModules[moduleId]) return installedModules[moduleId].exports;
+                var module = installedModules[moduleId] = {
+                    exports: {},
+                    id: moduleId,
+                    loaded: !1
+                };
+                return modules[moduleId].call(module.exports, module, module.exports, __webpack_require__), 
+                module.loaded = !0, module.exports;
+            }
+            var installedModules = {};
+            return __webpack_require__.m = modules, __webpack_require__.c = installedModules, 
+            __webpack_require__.p = "", __webpack_require__(0);
+        }([ function(module, exports, __webpack_require__) {
+            function isIE() {
+                var myNav = navigator.userAgent.toLowerCase();
+                return -1 != myNav.indexOf("msie") ? parseInt(myNav.split("msie")[1]) : !1;
+            }
+            function addStyle(style) {
+                if (platformSupported) {
+                    var head = document.head || document.getElementsByTagName("head")[0];
+                    currentStyleNode && head.removeChild(currentStyleNode), currentStyleNode = document.createElement("style"), 
+                    currentStyleNode.innerHTML = style, head.appendChild(currentStyleNode);
+                }
+            }
+            function addClass(el, className) {
+                el.className.indexOf(className) < 0 && (el.className += " " + className);
+            }
+            function removeClass(el, className) {
+                el.className = el.className.replace(className, "");
+            }
+            function calculateLuma(hexcode) {
+                var c = hexcode.substring(1), rgb = parseInt(c, 16), r = rgb >> 16 & 255, g = rgb >> 8 & 255, b = rgb >> 0 & 255;
+                return .2126 * r + .7152 * g + .0722 * b;
+            }
+            var currentStyleNode, autoplay = window.location.href.indexOf("autoplay") >= 0, style = "#vp_bootstrap #vp_playbutton #vp_playbutton_icon { fill:<arrowColor>; }   #vp_bootstrap #vp_playbutton {background-color:<color>;} #vp_bootstrap #vp_playbutton:hover {background-color:<colorHover>;}", buildMode = window.location.href.indexOf("build") >= 0, previewMode = window.location.href.indexOf("preview") >= 0, isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent), isIPhone = /iPhone|iPod/i.test(navigator.userAgent), isIPad = /iPad/i.test(navigator.userAgent), apiObj = {
+                loaded: !0
+            }, conf = document.videopath.player.conf;
+            document.videopath = document.videopath || {}, document.videopath.player = document.videopath.player || {}, 
+            document.videopath.player.bootstrap = apiObj;
+            var videoSupportsIPhone = conf.video.source && (conf.video.source.iphone_support || conf.video.source.jpg_sequence_support);
+            isMobileDevice && (autoplay = !1);
+            var platformSupported = !(isIE() && isIE() < 10), div_status = document.getElementById("vp_status"), div_playbutton = document.getElementById("vp_playbutton"), div_poster = document.getElementById("vp_poster"), div_bootstrap = document.getElementById("vp_bootstrap"), div_loader = document.getElementById("vp_loader");
+            if (apiObj.remove = function() {
+                addClass(div_bootstrap, "vp_hidden"), setTimeout(function() {
+                    div_bootstrap.parentNode.removeChild(div_bootstrap), document.videopath.player.bootstrap = null;
+                }, 200);
+            }, apiObj.goToLoadingMode = function(hidePoster) {
+                div_status.innerHTML = "Loading Video", addClass(div_playbutton, "vp_hidden"), hidePoster && addClass(div_poster, "vp_hidden"), 
+                div_loader.className = "vp_rotating";
+            }, apiObj.leaveLoadingMode = function() {
+                div_status.innerHTML = "", removeClass(div_playbutton, "vp_hidden"), removeClass(div_poster, "vp_hidden"), 
+                div_loader.className = "vp_hidden";
+            }, apiObj.mainAppStarted = function() {
+                (buildMode || previewMode || isMobileDevice) && apiObj.leaveLoadingMode();
+            }, apiObj.setThumbnail = function(url) {
+                if (url && !this.thumbnailSet) {
+                    this.thumbnailSet = !0;
+                    var img = document.createElement("img");
+                    img.onload = function() {
+                        apiObj.play_button_tapped || (div_poster.style.backgroundImage = "url('" + url + "')", 
+                        removeClass(div_poster, "vp_hidden"));
+                    }, img.src = url;
+                }
+            }, apiObj.setColors = function(buttonColor, buttonColorHover, arrowColor) {
+                arrowColor || (arrowColor = conf.buttonColor && calculateLuma(buttonColor) > 125 ? "#222222" : "#ffffff"), 
+                s = style.replace("<color>", buttonColor).replace("<colorHover>", buttonColorHover).replace("<arrowColor>", arrowColor), 
+                addStyle(s);
+            }, autoplay && platformSupported && (div_playbutton.parentNode.removeChild(div_playbutton), 
+            apiObj.goToLoadingMode(!0)), apiObj.setColors(conf.buttonColor, conf.buttonColorHover, conf.arrowColor), 
+            (isIPhone && !videoSupportsIPhone || isIPad) && addClass(div_bootstrap, "vp_touch_ready"), 
+            autoplay || apiObj.setThumbnail(conf.thumbnail), platformSupported) {
+                (buildMode || previewMode || isMobileDevice) && apiObj.goToLoadingMode(!1);
+                var src = conf.srcURL + "desktop.js", s = document.createElement("script");
+                s.src = src, s.async = !0, document.body.appendChild(s), s = document.createElement("script"), 
+                s.src = "//www.youtube.com/iframe_api", s.async = !0, document.body.appendChild(s);
+            } else apiObj.goToLoadingMode(!0), div_status.innerHTML = "Internet Explorer 9 and earlier are not supported. Please upgrade to a newer Version of your Browser!", 
+            addClass(div_playbutton, "vp_hidden");
+            div_bootstrap.onmousedown = function() {
+                apiObj.play_button_tapped = !0, document.videopath.player.api ? (document.videopath.player.api.command("play"), 
+                apiObj.goToLoadingMode(!0)) : apiObj.goToLoadingMode(!0);
+            };
+        } ]);
+    </script>
+
+
+</body>
+</html>
+
+

@@ -1,0 +1,9 @@
+{% extends "mails/base_1.txt" %}
+{% load mathfilters %}
+{% block content %}
+We just tried to charge <strong>{{ amount_due | div:100 | floatformat:-2}} {{currency}}</strong> for your Videopath subscription, but the payment failed. Please make sure you have an up to date credit card registered in our app.
+
+To change your plan or payment settings, visit your plans page on your account settings at <a href="http://app.videopath.com">http://app.videopath.com</a>.
+
+We will try to charge your account again in a few days.
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "mails/base_1.txt" %}
+{% block content %}
+Welcome to your new Videopath {{ plan }} plan. 
+
+Your subscription will auto-renew every {{ interval }}.{% if is_free %} {% else %} You will receive your payment invoice in a separate email. {% endif %}
+
+To update your plan and billing settings, please visit the plan page on your account settings. 
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "mails/base_1.txt" %}
+{% block content %}
+You have used up 80% of your plan's total video views for this month. 
+
+If you exceed your monthly quota, viewers may still view your videos but Videopath interactivity will be disabled.
+
+Visit the plans page of your account settings to upgrade to higher monthly view limits or feel free to contact us at: support@videopath.com.
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "mails/base_1.html" %}
+{% load mathfilters %}
+{% block content %}
+
+<p>
+We have just created a Videopath subscription invoice for <strong>{{ amount_due | div:100 | floatformat:-2}} {{currency}}</strong>.
+</p>
+<p>
+<br />
+<a href = "{{ link }}" class = "button">Display invoice</a>
+<br /><br />
+</p>
+<p>
+	To change your plan or payment settings, visit your plans page on your account settings  <a href="http://app.videopath.com">http://app.videopath.com</a>.
+</p>
+
+{% endblock %}

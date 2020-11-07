@@ -1,0 +1,34 @@
+image: kroniak/ssh-client:3.6 
+before_script:
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - mkdir -p ~/.ssh
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  - echo -n "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+
+stages:
+  - test
+  - deploy
+ 
+Test on Staging:
+  type: test
+  environment: staging
+  script:
+    - ssh root@api-staging.videopath.com "bash -ac 'cd /home/videopath/api && git fetch origin && git reset --hard origin/develop && source /home/videopath/envs/api/bin/activate && ./app.sh test'"
+    
+Deploy to Staging:
+  type: deploy
+  script:
+    - ssh root@api-staging.videopath.com "cd /home/videopath/; ./scripts/deploy-api-staging.sh "
+  environment: staging
+  only:
+    - develop
+    
+Deploy to Production:
+  type: deploy
+  script:
+    - ssh ubuntu@api.videopath.com "cd /home/ubuntu/; ./scripts/deploy-api-production.sh "
+  environment: production
+  only:
+    - master
+  when: manual
